@@ -163,11 +163,11 @@ export default defineConfig({
       themeConfig: {
         ...sharedThemeConfig,
         nav: [
-          { text: "下载", link: "/downloads/" },
-          { text: "文档", link: "/docs/" },
-          { text: "开发者", link: "/dev/" },
-          { text: "博客", link: "/blog/" },
-          { text: "关于", link: "/about/" },
+          { text: "下载", link: "/downloads/", activeMatch: "^/downloads/" },
+          { text: "文档", link: "/docs/", activeMatch: "^/docs/" },
+          { text: "开发者", link: "/dev/", activeMatch: "^/dev/" },
+          { text: "博客", link: "/blog/", activeMatch: "^/blog/" },
+          { text: "关于", link: "/about/", activeMatch: "^/about/" }
         ],
         sidebar: {
           "/docs/": [
@@ -238,11 +238,11 @@ export default defineConfig({
       themeConfig: {
         ...sharedThemeConfig,
         nav: [
-          { text: "Downloads", link: "/en/downloads/" },
-          { text: "Docs", link: "/en/docs/" },
-          { text: "Developers", link: "/en/dev/" },
-          { text: "Blog", link: "/en/blog/" },
-          { text: "About", link: "/en/about/" },
+          { text: "Downloads", link: "/en/downloads/", activeMatch: "^/en/downloads/" },
+          { text: "Docs", link: "/en/docs/", activeMatch: "^/en/docs/" },
+          { text: "Developers", link: "/en/dev/", activeMatch: "^/en/dev/" },
+          { text: "Blog", link: "/en/blog/", activeMatch: "^/en/blog/" },
+          { text: "About", link: "/en/about/", activeMatch: "^/en/about/" },
         ],
         sidebar: {
           "/en/docs/": [

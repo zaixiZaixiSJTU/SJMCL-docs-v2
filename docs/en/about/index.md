@@ -16,4 +16,4 @@ SJMC uses Minecraft as a carrier to shape a digital campus experience with virtu
 - BiliBili: [上海交通大学Minecraft社](https://space.bilibili.com/393112610)
 - Website: [mc.sjtu.cn](https://mc.sjtu.cn)
 - QQ Group for SJMCL Users: 860851380; QQ Group for SJMC Fans: 932452878
-- Launcher contact: launcher@sjmc.club; SJMC contact: contact@sjmc.club
+- Launcher contact: [launcher@sjmc.club](mailto:launcher@sjmc.club); SJMC contact: [contact@sjmc.club](mailto:contact@sjmc.club)

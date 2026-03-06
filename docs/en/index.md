@@ -19,6 +19,9 @@ hero:
       text: Read the docs
       link: /en/docs/
     - theme: alt
+      text: QQ Group
+      link: https://qm.qq.com/cgi-bin/qm/qr?k=GIGpauoghFeXKZyomQKFIoE_ZfPQIOpV&jump_from=webapi&authKey=I6J4u14K8opcMmGKflI3fTdlDBZYeveVYwIU/yctCFUrH/yYIX7GwhEjwVEa2+f6
+    - theme: alt
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
   image:

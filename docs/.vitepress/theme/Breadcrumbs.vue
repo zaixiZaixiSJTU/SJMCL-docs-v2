@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 const { frontmatter } = useData()
 
@@ -10,6 +10,10 @@ const breadcrumbs = computed(() => {
     link: string
   }[]
 })
+
+function resolveLink(link: string) {
+  return withBase(link)
+}
 </script>
 
 <template>
@@ -23,7 +27,7 @@ const breadcrumbs = computed(() => {
     >
       <a
         v-if="item.link"
-        :href="item.link"
+        :href="resolveLink(item.link)"
       >
         {{ item.title }}
       </a>

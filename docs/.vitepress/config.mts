@@ -131,6 +131,14 @@ export default defineConfig({
   lastUpdated: true,
   rewrites: (id) => id.startsWith('zh-Hans/') ? id.slice('zh-Hans/'.length) : id,
   vite: {
+    server: {
+      proxy: {
+        '/api-sjmcl': {
+          target: 'https://mc.sjtu.cn',
+          changeOrigin: true
+        }
+      }
+    },
     optimizeDeps: {
       exclude: [
         '@nolebase/vitepress-plugin-breadcrumbs/client',

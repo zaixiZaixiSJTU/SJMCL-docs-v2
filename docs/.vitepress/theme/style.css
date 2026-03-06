@@ -218,3 +218,23 @@ body {
   fill: #2d2d2d !important;
   stroke: #555 !important;
 }
+
+.downloads-page .VPHomeHero {
+  padding-top: 100px;
+}
+
+.downloads-page .VPHomeHero .container {
+  justify-content: center;
+}
+
+.downloads-page .VPHomeHero .main {
+  max-width: 100%;
+  text-align: center;
+}
+
+.downloads-page .VPHomeHero .name,
+.downloads-page .VPHomeHero .text,
+.downloads-page .VPHomeHero .tagline {
+  max-width: none;
+  text-align: center;
+}

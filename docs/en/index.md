@@ -13,6 +13,9 @@ hero:
     
   actions:
     - theme: brand
+      text: Download
+      link: /en/downloads/
+    - theme: alt
       text: Read the docs
       link: /en/docs/
     - theme: alt

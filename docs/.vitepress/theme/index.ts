@@ -1,4 +1,5 @@
-import { h } from 'vue'
+import { computed, h } from 'vue'
+import { useData } from 'vitepress'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import {
@@ -9,6 +10,7 @@ import {
 } from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
 import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
 import Breadcrumbs from './Breadcrumbs.vue'
+import DownloadsPage from './DownloadsPage.vue'
 import HeroBackground from './Layout.vue'
 import NavTitle from './NavTitle.vue'
 import SiteFooter from './SiteFooter.vue'
@@ -17,8 +19,17 @@ import './style.css'
 const theme: Theme = {
   extends: DefaultTheme,
   Layout: () => {
+    const { frontmatter } = useData()
+    const isDownloadsPage = computed(() => frontmatter.value.pageClass === 'downloads-page')
+
     return h(DefaultTheme.Layout, null, {
       'home-hero-before': () => h(HeroBackground),
+      ...(isDownloadsPage.value
+        ? {
+            'home-hero-info': () => h(DownloadsPage, { section: 'hero' }),
+            'home-hero-after': () => h(DownloadsPage, { section: 'cards' })
+          }
+        : {}),
       'doc-before': () => h(Breadcrumbs),
       'layout-bottom': () => h(SiteFooter),
       'nav-bar-title-after': () => h(NavTitle),

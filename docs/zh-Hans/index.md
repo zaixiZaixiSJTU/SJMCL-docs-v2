@@ -12,7 +12,10 @@ hero:
     由上海交通大学 Minecraft 社成员自主开发
   actions:
     - theme: brand
-      text: 查看文档
+      text: 下载
+      link: /downloads/
+    - theme: alt
+      text: 阅读文档
       link: /docs/
     - theme: alt
       text: GitHub

@@ -2,6 +2,57 @@ import { defineConfig } from 'vitepress'
 
 const BASE = '/sjmcl/'
 const FAVICON_URL = `${BASE}logo.png`
+const localSearch = {
+  provider: 'local',
+  options: {
+    translations: {
+      button: {
+        buttonText: '搜索',
+        buttonAriaLabel: '搜索'
+      },
+      modal: {
+        resetButtonTitle: '清除查询条件',
+        backButtonTitle: '关闭搜索',
+        noResultsText: '未找到相关结果',
+        displayDetails: '显示详细列表',
+        footer: {
+          selectText: '选择',
+          selectKeyAriaLabel: '回车键',
+          navigateText: '切换',
+          navigateUpKeyAriaLabel: '向上方向键',
+          navigateDownKeyAriaLabel: '向下方向键',
+          closeText: '关闭',
+          closeKeyAriaLabel: 'Esc 键'
+        }
+      }
+    },
+    locales: {
+      en: {
+        translations: {
+          button: {
+            buttonText: 'Search',
+            buttonAriaLabel: 'Search'
+          },
+          modal: {
+            resetButtonTitle: 'Clear query',
+            backButtonTitle: 'Close search',
+            noResultsText: 'No results found',
+            displayDetails: 'Display detailed list',
+            footer: {
+              selectText: 'Select',
+              selectKeyAriaLabel: 'Enter key',
+              navigateText: 'Navigate',
+              navigateUpKeyAriaLabel: 'Arrow up',
+              navigateDownKeyAriaLabel: 'Arrow down',
+              closeText: 'Close',
+              closeKeyAriaLabel: 'Escape key'
+            }
+          }
+        }
+      }
+    }
+  }
+} as const
 
 function createBreadcrumbs(relativePath: string, title: string) {
   const normalized = relativePath.replace(/(^\/|\/$)/g, '')
@@ -58,9 +109,7 @@ const sharedThemeConfig = {
   socialLinks: [
     { icon: 'github', link: 'https://github.com/UNIkeEN/SJMCL' }
   ],
-  search: {
-    provider: 'local'
-  }
+  search: localSearch
 } as const
 
 // https://vitepress.dev/reference/site-config
@@ -68,6 +117,9 @@ export default defineConfig({
   title: 'SJMC Launcher',
   description: 'Docs for the SJMC Launcher',
   base: BASE,
+  themeConfig: {
+    search: localSearch
+  },
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: FAVICON_URL }],
     ['link', { rel: 'apple-touch-icon', href: FAVICON_URL }]

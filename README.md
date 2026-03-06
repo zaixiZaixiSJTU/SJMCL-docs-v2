@@ -22,6 +22,19 @@ npm run docs:dev
 http://localhost:5173
 ```
 
+## 搜索说明
+
+本项目使用 VitePress 原生本地搜索。
+
+- 日常本地开发直接运行 `npm run docs:dev` 即可使用搜索。
+- 如果是刚启用搜索、刚修改搜索配置，或者你发现搜索框能打开但搜不到内容，请先重启一次 `npm run docs:dev`。
+- 如果你要验证最终构建产物里的搜索是否正常，执行：
+
+```bash
+npm run docs:build
+npm run docs:preview
+```
+
 ## 其他常用命令
 
 构建静态站点：

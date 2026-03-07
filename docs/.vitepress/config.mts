@@ -67,7 +67,8 @@ function createBreadcrumbs(relativePath: string, title: string) {
 
   if (!segments.length || normalized === "index.md") return [];
 
-  if (contentSegments[0] === "blog") return [];
+  if (contentSegments[0] === "blog" || contentSegments[0] === "about")
+    return [];
 
   const isEnglish = segments[0] === "en";
   const labels: Record<string, string> = isEnglish

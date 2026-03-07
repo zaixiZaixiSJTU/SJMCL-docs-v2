@@ -1,6 +1,6 @@
 ---
 sidebar: false
-outline: false
+# outline: false
 ---
 
 # 关于我们

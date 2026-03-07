@@ -1,4 +1,20 @@
 
+@font-face {
+  font-family: "Sinter";
+  src: url("/fonts/Sinter/Sinter-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sinter";
+  src: url("/fonts/Sinter/Sinter-Medium.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --vp-c-brand-1: #2b6cb0;
   --vp-c-brand-2: #3182ce;
@@ -11,7 +27,7 @@
     radial-gradient(circle at 70% 30%, rgba(49, 130, 206, 0.36), transparent 34%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.35));
   --vp-home-hero-image-filter: blur(44px);
-  --vp-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --vp-font-family-base: -apple-system, "PingFang SC", "Sinter", BlinkMacSystemFont, "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --vp-font-family-mono: "SFMono-Regular", "JetBrains Mono", "Menlo", monospace;
 }
 

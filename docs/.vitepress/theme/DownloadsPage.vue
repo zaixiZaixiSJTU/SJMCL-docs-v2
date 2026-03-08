@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
-import { VPButton } from 'vitepress/theme'
+import { VPBadge, VPButton } from 'vitepress/theme'
 import { icons as simpleIcons } from '@iconify-json/simple-icons'
 
 type ReleaseFile = {
@@ -17,6 +17,7 @@ type ReleaseResponse = {
 type DownloadButton = {
   label: string
   href: string
+  recommended: boolean
 }
 
 type CardData = {
@@ -38,6 +39,8 @@ const GITHUB_RELEASES_URL = 'https://github.com/UNIkeEN/SJMCL/releases'
 const { frontmatter, lang } = useData()
 const sharedRelease = ref<ReleaseResponse | null>(null)
 const sharedLoadFailed = ref(false)
+const detectedArchitecture = ref('')
+const detectedPlatform = ref('')
 
 let sharedLoadPromise: Promise<void> | null = null
 
@@ -79,7 +82,8 @@ const messages = computed(() => {
       intel: 'Intel',
       appleSilicon: 'Apple Silicon',
       downloadLabel: 'Download',
-      historyLinkText: 'View historical versions on GitHub Releases'
+      historyLinkText: 'View historical versions on GitHub Releases',
+      recommended: 'Recommended'
     }
   }
 
@@ -108,7 +112,8 @@ const messages = computed(() => {
     intel: 'Intel',
     appleSilicon: 'Apple Silicon',
     downloadLabel: '下载',
-    historyLinkText: '在 GitHub Releases 查看历史版本'
+    historyLinkText: '在 GitHub Releases 查看历史版本',
+    recommended: '推荐'
   }
 })
 
@@ -158,21 +163,49 @@ function archLabel(arch: string) {
 }
 
 function sortFiles(files: ReleaseFile[]) {
-  const formatOrder = ['setup', 'portable', 'dmg', 'bundle', 'appimage', 'deb', 'rpm']
+  const formatOrder = ['portable', 'setup', 'dmg', 'appBundle', 'appimage', 'deb', 'rpm', 'other']
   const archOrder = ['x64', 'x86', 'arm64']
+
+  const fileFormat = (name: string) => {
+    const normalized = name.toLowerCase()
+
+    if (normalized.includes('setup.exe'))
+      return 'setup'
+    if (normalized.includes('portable'))
+      return 'portable'
+    if (normalized.endsWith('.dmg'))
+      return 'dmg'
+    if (normalized.includes('.app.tar.gz'))
+      return 'appBundle'
+    if (normalized.includes('.appimage'))
+      return 'appimage'
+    if (normalized.endsWith('.deb'))
+      return 'deb'
+    if (normalized.endsWith('.rpm'))
+      return 'rpm'
+
+    return 'other'
+  }
 
   return [...files].sort((left, right) => {
     const leftName = left.name.toLowerCase()
     const rightName = right.name.toLowerCase()
 
-    const leftFormat = formatOrder.findIndex((format) => leftName.includes(format))
-    const rightFormat = formatOrder.findIndex((format) => rightName.includes(format))
+    const leftFormat = formatOrder.indexOf(fileFormat(leftName))
+    const rightFormat = formatOrder.indexOf(fileFormat(rightName))
 
     if (leftFormat !== rightFormat)
       return leftFormat - rightFormat
 
     return archOrder.indexOf(normalizeArch(left.name)) - archOrder.indexOf(normalizeArch(right.name))
   })
+}
+
+function isRecommendedFile(file: ReleaseFile) {
+  const name = file.name.toLowerCase()
+
+  return name.includes('_windows_') && name.includes('_portable.exe')
+    || name.includes('_macos_') && name.endsWith('.dmg')
 }
 
 function buttonLabel(file: ReleaseFile) {
@@ -201,7 +234,8 @@ function buttonLabel(file: ReleaseFile) {
 function createButtons(files: ReleaseFile[]) {
   return sortFiles(files).map((file) => ({
     label: buttonLabel(file),
-    href: fileUrl(file.name)
+    href: fileUrl(file.name),
+    recommended: isRecommendedFile(file)
   }))
 }
 
@@ -230,6 +264,40 @@ function autoDownloadLabel(file: ReleaseFile) {
     return `${messages.value.downloadLabel} Linux (x86_64) 版`
 
   return messages.value.unknownDownload
+}
+
+type TargetPlatform = 'windows' | 'macos' | 'linux' | 'unknown'
+type TargetArch = 'arm64' | 'x64' | 'x86' | 'unknown'
+
+function detectPlatform(source: string) {
+  if (source.includes('windows') || source.includes('win32') || source.includes('win64'))
+    return 'windows' as const
+  if (source.includes('mac'))
+    return 'macos' as const
+  if (source.includes('linux'))
+    return 'linux' as const
+  return 'unknown' as const
+}
+
+function detectArch(source: string, platform: TargetPlatform) {
+  const isArm = /\b(arm64|aarch64|armv8)\b/.test(source)
+  const isX64 = /\b(x86_64|x64|win64|amd64)\b/.test(source)
+  const isX86 = /\b(i686|i386|x86)\b/.test(source) && !isX64
+
+  if (isArm)
+    return 'arm64' as const
+  if (isX86)
+    return 'x86' as const
+  if (isX64)
+    return 'x64' as const
+
+  // Sensible defaults when architecture is unavailable.
+  if (platform === 'macos')
+    return 'arm64' as const
+  if (platform === 'windows' || platform === 'linux')
+    return 'x64' as const
+
+  return 'unknown' as const
 }
 
 async function ensureReleaseLoaded() {
@@ -275,55 +343,56 @@ async function ensureReleaseLoaded() {
 }
 
 function detectAutoDownload(files: ReleaseFile[]) {
-  const fallbackFile = files.find((file) => file.name.includes('windows_x86_64_portable.exe'))
-    || files.find((file) => file.name.includes('windows_x86_64_setup.exe'))
-    || files.find((file) => file.name.includes('linux_x86_64.portable'))
+  const normalized = files.map((file) => ({
+    file,
+    name: file.name.toLowerCase()
+  }))
+  const fallbackFile = normalized.find(({ name }) => name.includes('windows_x86_64_portable.exe'))?.file
+    || normalized.find(({ name }) => name.includes('windows_x86_64_setup.exe'))?.file
+    || normalized.find(({ name }) => name.includes('linux_x86_64.portable'))?.file
     || files[0]
 
   if (typeof navigator === 'undefined')
     return fallbackFile
 
-  const platform = navigator.platform.toLowerCase()
-  const userAgent = navigator.userAgent.toLowerCase()
-  const pointer = navigator.userAgentData?.platform?.toLowerCase?.() || ''
-  const source = `${platform} ${pointer} ${userAgent}`
-  const isArm = source.includes('arm') || source.includes('aarch64') || source.includes('apple')
+  const source = `${navigator.platform} ${navigator.userAgentData?.platform || ''} ${navigator.userAgent} ${detectedPlatform.value} ${detectedArchitecture.value}`.toLowerCase()
+  const platform = detectPlatform(source)
+  const arch = detectArch(source, platform)
 
-  if (source.includes('mac')) {
-    return files.find((file) => isArm
-      ? file.name.includes('macos_aarch64.dmg')
-      : file.name.includes('macos_x86_64.dmg'))
-      || files.find((file) => file.name.includes('macos_') && file.name.endsWith('.dmg'))
+  if (platform === 'macos') {
+    return normalized.find(({ name }) => arch === 'arm64'
+      ? name.includes('macos_aarch64.dmg')
+      : name.includes('macos_x86_64.dmg'))?.file
+      || normalized.find(({ name }) => name.includes('macos_') && name.endsWith('.dmg'))?.file
       || fallbackFile
   }
 
-  if (source.includes('linux')) {
-    return files.find((file) => isArm
-      ? file.name.includes('linux_aarch64.portable')
-      : file.name.includes('linux_x86_64.portable'))
-      || files.find((file) => isArm
-        ? file.name.includes('linux_aarch64.AppImage')
-        : file.name.includes('linux_x86_64.AppImage'))
-      || files.find((file) => file.name.includes('linux_') && file.name.includes('.portable'))
-      || files.find((file) => file.name.includes('linux_') && file.name.endsWith('.AppImage'))
+  if (platform === 'linux') {
+    return normalized.find(({ name }) => arch === 'arm64'
+      ? name.includes('linux_aarch64.portable')
+      : name.includes('linux_x86_64.portable'))?.file
+      || normalized.find(({ name }) => arch === 'arm64'
+        ? name.includes('linux_aarch64.appimage')
+        : name.includes('linux_x86_64.appimage'))?.file
+      || normalized.find(({ name }) => name.includes('linux_') && name.includes('.portable'))?.file
+      || normalized.find(({ name }) => name.includes('linux_') && name.endsWith('.appimage'))?.file
       || fallbackFile
   }
 
-  if (source.includes('win')) {
-    if (isArm) {
-      return files.find((file) => file.name.includes('windows_aarch64_portable.exe'))
-        || files.find((file) => file.name.includes('windows_aarch64_setup.exe'))
+  if (platform === 'windows') {
+    if (arch === 'arm64') {
+      return normalized.find(({ name }) => name.includes('windows_aarch64_portable.exe'))?.file
+        || normalized.find(({ name }) => name.includes('windows_aarch64_setup.exe'))?.file
         || fallbackFile
     }
 
-    const is32Bit = source.includes('i686') || source.includes('x86') || source.includes('win32')
-
-    return files.find((file) => is32Bit
-      ? file.name.includes('windows_i686_portable.exe')
-      : file.name.includes('windows_x86_64_portable.exe'))
-      || files.find((file) => is32Bit
-        ? file.name.includes('windows_i686_setup.exe')
-        : file.name.includes('windows_x86_64_setup.exe'))
+    const is32Bit = arch === 'x86'
+    return normalized.find(({ name }) => is32Bit
+      ? name.includes('windows_i686_portable.exe')
+      : name.includes('windows_x86_64_portable.exe'))?.file
+      || normalized.find(({ name }) => is32Bit
+        ? name.includes('windows_i686_setup.exe')
+        : name.includes('windows_x86_64_setup.exe'))?.file
       || fallbackFile
   }
 
@@ -381,6 +450,15 @@ const cards = computed<CardData[]>(() => {
 })
 
 onMounted(() => {
+  if (typeof navigator !== 'undefined' && navigator.userAgentData?.getHighEntropyValues) {
+    navigator.userAgentData.getHighEntropyValues(['architecture', 'platform'])
+      .then((value) => {
+        detectedArchitecture.value = value.architecture?.toLowerCase?.() || ''
+        detectedPlatform.value = value.platform?.toLowerCase?.() || ''
+      })
+      .catch(() => {})
+  }
+
   void ensureReleaseLoaded()
 })
 </script>
@@ -440,6 +518,12 @@ onMounted(() => {
               download
             >
               {{ button.label }}
+              <VPBadge
+                v-if="button.recommended"
+                type="tip"
+                :text="messages.recommended"
+                class="downloads-card-badge"
+              />
             </a>
 
             <p
@@ -592,6 +676,7 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: 42px;
   padding: 0 14px;
   border: 1px solid rgba(148, 163, 184, 0.26);
@@ -600,6 +685,13 @@ onMounted(() => {
   color: var(--vp-c-text-1);
   text-decoration: none;
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.downloads-card-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0;
+  transform: none;
 }
 
 .downloads-card-button:hover {

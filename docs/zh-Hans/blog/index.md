@@ -1,6 +1,6 @@
 ---
 sidebar: false
-outline: false
+# outline: false
 ---
 
 # 博客

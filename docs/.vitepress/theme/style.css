@@ -10,6 +10,14 @@
 @font-face {
   font-family: "Sinter";
   src: url("/fonts/Sinter/Sinter-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sinter";
+  src: url("/fonts/Sinter/Sinter-Medium.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;

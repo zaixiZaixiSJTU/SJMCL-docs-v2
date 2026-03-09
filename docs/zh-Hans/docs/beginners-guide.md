@@ -8,7 +8,7 @@
 
 你需要使用 **Microsoft 账户** 购买游戏才能游玩 Minecraft，或者使用 **离线账户 / 第三方（外置）账户**。
 
-你可以在 [Minecraft 官方网站](https://www.minecraft.net/) 或 [Xbox 商店](https://www.xbox.com/) 购买游戏。
+你可以在 [Minecraft 官方网站](https://www.minecraft.net/zh-hans/store/minecraft-java-bedrock-edition-pc) 或 [Xbox 商店](https://www.xbox.com/zh-cn/games/store/minecraft-java-bedrock-edition-for-pc/9NXP44L49SHJ) 购买游戏。
 
 完成购买后，在 SJMCL 主界面的顶部菜单点击 **账户**，然后点击右上角的 **添加角色** 登录 **微软角色**，或创建 **离线角色** 和 **第三方认证角色**。
 

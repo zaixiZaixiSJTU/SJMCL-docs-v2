@@ -8,7 +8,7 @@ If you want to dive deeper into a specific topic, use the links provided in this
 
 To play Minecraft, you need to purchase the game with a **Microsoft account**, or use an **offline account / third-party (external) account**.
 
-You can buy the game from the [Minecraft Official Website](https://www.minecraft.net/) or the [Xbox Store](https://www.xbox.com/).
+You can buy the game from the [Minecraft Official Website](https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc) or the [Xbox Store](https://www.xbox.com/en-us/games/store/minecraft-java-bedrock-edition-for-pc/9NXP44L49SHJ).
 
 After purchase, click **Accounts** in the top menu of SJMCL, then click **Add Profile** in the upper-right corner to sign in with a **Microsoft profile**, or create an **Offline profile** and a **Third-party Authentication profile**.
 

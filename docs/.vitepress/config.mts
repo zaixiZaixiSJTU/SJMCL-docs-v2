@@ -177,7 +177,8 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: '简介', link: '/docs/' },
-                { text: '新手教程', link: '/docs/beginners-guide/' }
+                { text: '下载与安装', link: '/docs/install' },
+                { text: '新手教程', link: '/docs/beginners-guide' }
               ]
             },
             {
@@ -253,9 +254,13 @@ export default defineConfig({
                   text: 'Introduction',
                   link: '/en/docs/' 
                 },
+                {
+                  text: 'Download and Install',
+                  link: '/en/docs/install'
+                },
                 { 
                   text: 'Beginner\'s Guide', 
-                  link: '/docs/beginners-guide/' 
+                  link: '/en/docs/beginners-guide' 
                 }
               ]
             },

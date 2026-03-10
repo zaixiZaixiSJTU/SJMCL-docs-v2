@@ -201,12 +201,16 @@ export default defineConfig({
           ],
           "/dev/": [
             {
-              text: "开发者",
+              text: "SJMCL",
               items: [
                 { text: "概览", link: "/dev/" },
                 { text: "基础工作流", link: "/dev/guide" },
                 { text: "开源协议", link: "/dev/license" },
               ],
+            },
+            {
+              text: "外部集成",
+              items: [{ text: "Deeplink API", link: "/dev/deeplink-api" }],
             },
           ],
         },
@@ -285,12 +289,16 @@ export default defineConfig({
           ],
           "/en/dev/": [
             {
-              text: "Developers",
+              text: "SJMCL",
               items: [
                 { text: "Overview", link: "/en/dev/" },
                 { text: "Basic Workflow", link: "/en/dev/guide" },
                 { text: "License", link: "/en/dev/license" },
               ],
+            },
+            {
+              text: "External Integrations",
+              items: [{ text: "Deeplink API", link: "/en/dev/deeplink-api" }],
             },
           ],
         },

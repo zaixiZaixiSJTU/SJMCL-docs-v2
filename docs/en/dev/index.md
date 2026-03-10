@@ -1,8 +1,14 @@
 # Developers
 
-This section contains developer documentation related to SJMCL development, redistribution, and licensing.
+This section contains developer documentation for SJMCL itself, including development, redistribution, and licensing, as well as documentation for related software and external integrations around SJMCL.
 
 ## Current Content
 
+### SJMCL
+
 - [Basic Workflow](/en/dev/guide)
 - [License](/en/dev/license)
+
+### External Integrations
+
+- [Deeplink API](/en/dev/deeplink-api)

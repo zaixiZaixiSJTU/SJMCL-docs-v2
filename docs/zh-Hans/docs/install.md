@@ -42,8 +42,12 @@ makepkg -si
 
 ## 常见问题
 
-### Gdk-Message: 23:55:52.007: Error 71 (Protocol error) dispatching to Wayland display.
+TBD
 
-这是一个[上游问题](https://github.com/tauri-apps/tauri/issues/9394),通常发生在使用Wayland与Nvidia独立显卡时。
+## 故障排查
 
-请添加环境变量`__NV_DISABLE_EXPLICIT_SYNC=1`或`WEBKIT_DISABLE_DMABUF_RENDERER=1`
+### Linux: Gdk-Message: Error 71 (Protocol error) dispatching to Wayland display.
+
+这是一个 [上游问题](https://github.com/tauri-apps/tauri/issues/9394)，通常发生在使用 Wayland 与 Nvidia 独立显卡时。
+
+请添加环境变量 `__NV_DISABLE_EXPLICIT_SYNC=1` 或 `WEBKIT_DISABLE_DMABUF_RENDERER=1`。

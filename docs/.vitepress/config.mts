@@ -75,6 +75,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
     ? {
         docs: "Docs",
         intelligence: "Intelligence",
+        modloader: "ModLoader",
         dev: "Developers",
         blog: "Blog",
         about: "About",
@@ -82,6 +83,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
     : {
         docs: "文档",
         intelligence: "智能",
+        modloader: "安装模组加载器",
         dev: "开发者",
         blog: "博客",
         about: "关于",
@@ -178,7 +180,14 @@ export default defineConfig({
               items: [
                 { text: '简介', link: '/docs/' },
                 { text: '下载与安装', link: '/docs/install' },
-                { text: '新手教程', link: '/docs/beginners-guide' }
+                { text: '新手教程', link: '/docs/beginners-guide' },
+                {
+                  text: '安装模组加载器',
+                  link: '/docs/modloader/',
+                  items: [
+                    { text: '安装模组', link: '/docs/modloader/install-mods' }
+                  ]
+                }
               ]
             },
             {
@@ -266,6 +275,13 @@ export default defineConfig({
                 { 
                   text: 'Beginner\'s Guide', 
                   link: '/en/docs/beginners-guide' 
+                },
+                {
+                  text: 'Installing Mod Loaders',
+                  link: '/en/docs/modloader/',
+                  items: [
+                    { text: 'Installing Mods', link: '/en/docs/modloader/install-mods' }
+                  ]
                 }
               ]
             },

@@ -74,6 +74,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
   const labels: Record<string, string> = isEnglish
     ? {
         docs: "Docs",
+        instance: "Game Instances",
         intelligence: "Intelligence",
         dev: "Developers",
         blog: "Blog",
@@ -81,6 +82,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
       }
     : {
         docs: "文档",
+        instance: "游戏实例",
         intelligence: "智能",
         dev: "开发者",
         blog: "博客",
@@ -182,6 +184,16 @@ export default defineConfig({
               ]
             },
             {
+              text: "游戏实例",
+              collapsed: false,
+              items: [
+                {
+                  text: '模组与加载器',
+                  link: '/docs/instance/mod-loader'
+                }
+              ]
+            },
+            {
               text: "智能",
               collapsed: false,
               items: [
@@ -263,9 +275,16 @@ export default defineConfig({
                   text: 'Download and Install',
                   link: '/en/docs/install'
                 },
-                { 
-                  text: 'Beginner\'s Guide', 
-                  link: '/en/docs/beginners-guide' 
+                { text: 'Beginner\'s Guide', link: '/en/docs/beginners-guide' }
+              ]
+            },
+            {
+              text: "Game Instances",
+              collapsed: false,
+              items: [
+                {
+                  text: 'Mods and Loaders',
+                  link: '/en/docs/instance/mod-loader'
                 }
               ]
             },

@@ -1,5 +1,8 @@
 # Beginner's Guide
 
+> [!NOTE]
+> The screenshots in the documentation are from the Chinese interface. The launcher already includes English and other language translations, and the documentation will be updated later.
+
 This guide is for **new players or users who are using a Minecraft launcher for the first time**. It is designed to help you quickly get started with the **SJMCL Launcher** and Minecraft in the simplest way.
 
 If you want to dive deeper into a specific topic, use the links provided in this document.
@@ -39,7 +42,7 @@ If you **have not installed any game versions yet**, follow these steps:
 
    > [!TIP]
    > What is a mod loader? Which one should I choose?
-   > See: [Install Mod Loaders]()
+   > See: [Install Mod Loaders](/en/docs/instance/mod-loader)
 
    ![Select Loader](/images/beginners-guide-game-loader.png)
 

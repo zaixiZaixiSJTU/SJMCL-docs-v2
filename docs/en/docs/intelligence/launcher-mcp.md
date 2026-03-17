@@ -1,7 +1,7 @@
 # Launcher MCP Service
 
 > [!NOTE]
-> This document was translated from the Simplified Chinese version using AI.
+> The screenshots in the documentation are from the Chinese interface. The launcher already includes English and other language translations, and the documentation will be updated later.
 
 You can enable the Launcher MCP service so external Agent applications can automate control of the launcher.
 

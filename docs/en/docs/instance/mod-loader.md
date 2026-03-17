@@ -1,8 +1,17 @@
-# Installing Mod Loaders
+# Mods and Loaders
 
-When installing a new game client, you will see 4 mod loaders available: `Forge`, `Fabric`, `NeoForge`, and `Optifine`.
+> [!NOTE]
+> The screenshots in the documentation are from the Chinese interface. The launcher already includes English and other language translations, and the documentation will be updated later.
 
-When selecting Fabric, `Fabric API` will be included by default — you can uncheck it at the bottom of the screen.
+Mods can add lots of new content or gameplay features to the game. To use mods in Minecraft, you first need to install a loader.
+
+## Installing Mod Loaders
+
+A mod loader is a software tool that allows you to install and run mods in Minecraft. Different loaders have different characteristics and compatibility.
+
+When you install a new game client, you will see 4 mod loaders available: `Forge`, `Fabric`, `NeoForge`, and `Quilt`.
+
+> When selecting Fabric, `Fabric API` will be included by default, and you can uncheck it at the bottom of the page.
 
 If you are unsure which mod loader to choose, we recommend `Fabric` / `NeoForge` for versions 1.14 and above, and `Forge` for versions below 1.14.
 
@@ -14,11 +23,16 @@ There are multiple ways to install mods in SJMCL. Choose the method that best su
 
 ### Auto Install
 
-The mod download interface is located within each instance. Go to the instance manager, select the instance you want to add mods to, switch to the **Mods** tab, and click the **Download Mods** button in the quick action bar on the right.
+Auto installation is the most convenient method. SJMCL will automatically handle mod downloading and installation for you.
 
-![](/images/mod-loader-download-step2.png)
+1. Go to the **Instance Management** page.
+2. Select the game instance you want.
+3. Switch to the **Mods** page and click the **Download Mods** button in the quick action bar on the right.
 
-Search for and select the mod you want. Downloaded mods will be automatically added to the mod folder of the current instance.
+   ![](/images/mod-loader-download-step2.png)
+
+4. Search for and select the mod you want.
+5. Downloaded mods will be added directly to the current instance's mod folder by default.
 
 SJMCL has built-in support for searching and downloading from `CurseForge` and `Modrinth`, with bilingual search support. If you can't find what you're looking for in your language, try searching in English.
 
@@ -36,11 +50,11 @@ Click a specific version of a mod to download it. A popup will show all optional
 
 ### Manual Install
 
-Most mod files have a `.jar` extension.
+If you have already downloaded a mod file (a `.jar` file), you can install it manually.
 
-Copy the `.jar` file into `\.minecraft\versions\<version name>\Mods`.
+Copy the `.jar` file into the `\.minecraft\versions\<version name>\Mods` folder.
 
-If version isolation is manually disabled, the folder is `\.minecraft\Mods`.
+If version isolation is manually disabled, the folder will be `\.minecraft\Mods`.
 
 Alternatively, you can add mods through SJMCL's **Game Management — Mod Management** page.
 
@@ -72,7 +86,7 @@ There are many reasons why a game may crash after installing mods, such as:
      - Increase the Java memory allocated to the game in instance settings.
      - Allocating 4 GB or more is generally recommended.
 
-2. For more complex errors, you can export the error report and consult an AI model (SJMCL has a built-in AI assistant [MiuChat](/en/docs/intelligence/miuchat)), or package the `\.minecraft\crash-reports` and `\.minecraft\logs` folders and share them with others for help.
+2. For more complex errors, you can export the error report and consult a large language model, or package the `\.minecraft\crash-reports` and `\.minecraft\logs` folders and share them with others for help.
 
 3. For modpacks with many mods where conflicts are hard to identify, use the bisect method — add or remove half the mods at a time, restart the game, and narrow down until you find the culprit.
 
@@ -86,4 +100,3 @@ If the issue persists:
 
 > [!TIP]
 > Please do not submit a GitHub issue for general game launch errors unrelated to the launcher.
-

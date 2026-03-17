@@ -74,16 +74,16 @@ function createBreadcrumbs(relativePath: string, title: string) {
   const labels: Record<string, string> = isEnglish
     ? {
         docs: "Docs",
+        instance: "Game Instances",
         intelligence: "Intelligence",
-        modloader: "ModLoader",
         dev: "Developers",
         blog: "Blog",
         about: "About",
       }
     : {
         docs: "文档",
+        instance: "游戏实例",
         intelligence: "智能",
-        modloader: "安装模组加载器",
         dev: "开发者",
         blog: "博客",
         about: "关于",
@@ -180,10 +180,16 @@ export default defineConfig({
               items: [
                 { text: '简介', link: '/docs/' },
                 { text: '下载与安装', link: '/docs/install' },
-                { text: '新手教程', link: '/docs/beginners-guide' },
+                { text: '新手教程', link: '/docs/beginners-guide' }
+              ]
+            },
+            {
+              text: "游戏实例",
+              collapsed: false,
+              items: [
                 {
-                  text: '安装模组加载器',
-                  link: '/docs/modloader'
+                  text: '模组与加载器',
+                  link: '/docs/instance/mod-loader'
                 }
               ]
             },
@@ -269,13 +275,16 @@ export default defineConfig({
                   text: 'Download and Install',
                   link: '/en/docs/install'
                 },
-                { 
-                  text: 'Beginner\'s Guide', 
-                  link: '/en/docs/beginners-guide' 
-                },
+                { text: 'Beginner\'s Guide', link: '/en/docs/beginners-guide' }
+              ]
+            },
+            {
+              text: "Game Instances",
+              collapsed: false,
+              items: [
                 {
-                  text: 'Installing Mod Loaders',
-                  link: '/en/docs/modloader'
+                  text: 'Mods and Loaders',
+                  link: '/en/docs/instance/mod-loader'
                 }
               ]
             },
